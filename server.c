@@ -71,6 +71,8 @@ int main(int argc, char *argv[]) {
         while(1) {
             printf("Waiting for incoming connections...\n");
             clinetLen = sizeof(struct sockaddr_in);
+
+            sock = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&clinetLen);
         }
 }
 
