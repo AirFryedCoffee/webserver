@@ -73,7 +73,40 @@ int main(int argc, char *argv[]) {
             clinetLen = sizeof(struct sockaddr_in);
 
             sock = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&clinetLen);
+
+            if (sock < 0) {
+                perror("Acception Failed");
+                return 1;
+            }
+
+            printf("Connection Successful\n");
+            memset(client_message, '\0' sizeof client_message);
+            memset(message, '\0', sizeof message);
+
+            if ( recv(sock, client_message, 200, 0) < 0) {
+                printf("Reception Failed");
+                break;
+            }
+
+            printf("Client response : %s\n", client_message);
+
+            if (strcmp(pMessage, client_message)==0) {
+                strcpy(message, "Hello!");
+            }
+            else {
+                strcpy(message, "Message Invalid");
+            }
+
+            if(send(sock, message, strlen(message), 0) < 0) {
+                printf("Send Failed");
+                return 1;
+            }
+
+            close(sock);
+            sleep(1);
+
         }
+        return 0;
 }
 
 
