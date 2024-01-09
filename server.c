@@ -30,7 +30,7 @@ short socketCreate(void) {
 
 int bindCreatedSocket(int hSocket) {
     int iRetval = -1;
-    int clientPort = 12345;
+    int clientPort = 12112;
 
     struct sockaddr_in remote = {0};
 
